@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">Recipes</string>
     <string name="get_started">Commencer</string>
+    <string name="step_title">Étape %d</string>
 </resources>
