@@ -1,6 +1,8 @@
 package com.nilhcem.xebia.recipes;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -16,9 +18,16 @@ import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.wearable.Asset;
+import com.google.android.gms.wearable.DataMap;
+import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.Wearable;
+import com.nilhcem.xebia.recipes.common.BitmapUtils;
+import com.nilhcem.xebia.recipes.common.Constants;
 import com.nilhcem.xebia.recipes.core.Recipe;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
 
 import butterknife.ButterKnife;
@@ -98,6 +107,7 @@ public class RecipeActivity extends Activity {
                     @Override
                     public void onConnected(Bundle connectionHint) {
                         Log.d(TAG, "onConnected: " + connectionHint);
+                        sendNotificationToWearable();
                     }
 
                     @Override
@@ -113,5 +123,22 @@ public class RecipeActivity extends Activity {
                 })
                 .addApi(Wearable.API)
                 .build();
+    }
+
+    void sendNotificationToWearable() {
+        PutDataMapRequest dataMapRequest = PutDataMapRequest.create(Constants.NOTIFICATION_RECIPE_PATH);
+        DataMap dataMap = dataMapRequest.getDataMap();
+        dataMap.putString(Constants.NOTIFICATION_RECIPE_TITLE, getString(mRecipe.nameRes));
+        dataMap.putString(Constants.NOTIFICATION_RECIPE_INGREDIENTS, getString(mRecipe.ingredientsRes));
+        dataMap.putStringArrayList(Constants.NOTIFICATION_RECIPE_STEPS,
+                new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.recipe_steps))));
+        dataMap.putAsset(Constants.NOTIFICATION_RECIPE_PHOTO, createAssetFromDrawableRes(mRecipe.drawableRes));
+        Wearable.DataApi.putDataItem(mGoogleApiClient, dataMapRequest.asPutDataRequest());
+    }
+
+    private Asset createAssetFromDrawableRes(int drawableRes) {
+        Bitmap origBitmap = BitmapFactory.decodeResource(getResources(), drawableRes);
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(origBitmap, 280, 280, false);
+        return Asset.createFromBytes(BitmapUtils.toByteArray(scaledBitmap));
     }
 }
