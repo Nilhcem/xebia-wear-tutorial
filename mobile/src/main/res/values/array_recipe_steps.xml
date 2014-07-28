@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Ideally, each recipe should have its own steps, but I am a lazy developer who just sets the same steps to every recipes -->
+    <string-array name="recipe_steps">
+        <item>Préparer les ingrédients sur le plan de travail</item>
+        <item>Mélangez-les un peu comme vous le souhaitez, vous êtes un artiste</item>
+        <item>Passez le tout au four pendant le temps que vous jugerez adéquat</item>
+        <item>Votre plat est probablement raté</item>
+        <item>Composez le numéro de votre pizzeria ou traiteur préféré et commandez n\'importe quoi</item>
+        <item>Réceptionnez votre plat, payez, dégustez</item>
+    </string-array>
+</resources>

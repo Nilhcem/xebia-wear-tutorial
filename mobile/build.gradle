@@ -1,0 +1,26 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 20
+    buildToolsVersion "20.0.0"
+
+    defaultConfig {
+        applicationId "com.nilhcem.xebia.recipes"
+        minSdkVersion 15
+        targetSdkVersion 20
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            runProguard false
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:20.+'
+    compile 'uk.co.chrisjenx:calligraphy:1.0.0'
+    compile 'com.jakewharton:butterknife:5.1.1'
+    compile project (':common')
+}

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#ff000000"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="80"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="6dp"
+            android:layout_weight="50"
+            android:orientation="vertical">
+
+            <!-- Maki -->
+            <com.nilhcem.xebia.recipes.core.ui.widgets.blur.SemiBlurredImageTextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="6dp"
+                android:layout_weight="60"
+                android:onClick="onRecipeClicked"
+                android:tag="MAKI"
+                app:blurredText="@string/maki_name"
+                app:imageBackground="@drawable/food_maki"
+                tools:background="@drawable/food_maki"/>
+
+            <!-- Potatoes -->
+            <com.nilhcem.xebia.recipes.core.ui.widgets.blur.SemiBlurredImageTextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="40"
+                android:onClick="onRecipeClicked"
+                android:tag="POTATOES"
+                app:blurredText="@string/potatoes_name"
+                app:imageBackground="@drawable/food_potatoes"
+                tools:background="@drawable/food_potatoes"/>
+        </LinearLayout>
+
+        <!-- Pie -->
+        <com.nilhcem.xebia.recipes.core.ui.widgets.blur.SemiBlurredImageTextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_weight="50"
+            android:onClick="onRecipeClicked"
+            android:tag="PIE"
+            app:blurredText="@string/pie_name"
+            app:imageBackground="@drawable/food_pie"
+            tools:background="@drawable/food_pie"/>
+    </LinearLayout>
+
+    <!-- Shrimp -->
+    <com.nilhcem.xebia.recipes.core.ui.widgets.blur.SemiBlurredImageTextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_weight="20"
+        android:onClick="onRecipeClicked"
+        android:tag="SHRIMP"
+        app:blurredText="@string/shrimp_name"
+        app:imageBackground="@drawable/food_shrimp"
+        tools:background="@drawable/food_shrimp"/>
+</LinearLayout>

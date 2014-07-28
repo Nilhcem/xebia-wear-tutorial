@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.nilhcem.xebia.recipes.core.parallax.ParallaxScrollView
+    android:id="@+id/recipe_scroll"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Picture -->
+        <ImageView
+            android:id="@+id/recipe_picture"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/food_potatoes"/>
+
+        <!-- Parallax container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
+            <!-- Ingredients headline -->
+            <TextView
+                style="@style/RecipeHeadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/recipe_ingredients"/>
+
+            <!-- Ingredients -->
+            <TextView
+                android:id="@+id/recipe_ingredients"
+                style="@style/RecipeContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                tools:text="@string/potatoes_ingredients"/>
+
+            <!-- Directions headline -->
+            <TextView
+                style="@style/RecipeHeadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/recipe_directions"/>
+
+            <!-- Directions container -->
+            <LinearLayout
+                android:id="@+id/recipe_steps"
+                style="@style/RecipeContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
+
+            <!-- Credits headline -->
+            <TextView
+                style="@style/RecipeHeadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/recipe_credits"/>
+
+            <!-- Credits -->
+            <TextView
+                android:id="@+id/recipe_credits"
+                style="@style/RecipeContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:linksClickable="true"
+                android:textSize="16sp"
+                tools:text="@string/potatoes_credits"/>
+        </LinearLayout>
+    </LinearLayout>
+</com.nilhcem.xebia.recipes.core.parallax.ParallaxScrollView>

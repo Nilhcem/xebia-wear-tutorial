@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Recipes</string>
+
+    <!-- Recipe Screen -->
+    <string name="recipe_open_on_watch">Ouvrir sur la smartwatch</string>
+    <string name="recipe_ingredients">Ingrédients</string>
+    <string name="recipe_directions">Étapes</string>
+    <string name="recipe_credits">Crédits</string>
+
+    <!-- Recipes data -->
+    <string name="maki_name">Gimbap [김밥]</string>
+    <string name="maki_ingredients">Riz\nFeuilles d\'algues\nConcombre\nAvocat\nViande\nSel</string>
+    <string name="maki_credits">Photo: kfoodaddict (unaltered)\nhttps://www.flickr.com/photos/kfoodaddict/6380704877\n\nLicense:\nhttp://creativecommons.org/licenses/by/2.0/deed.en</string>
+
+    <string name="potatoes_name">Seasoned potatoes</string>
+    <string name="potatoes_ingredients">Pommes de terre\nHuile d\'olive\nAil\nHerbes\nSel</string>
+    <string name="potatoes_credits">Photo: stevendepolo (unaltered)\nhttps://www.flickr.com/photos/stevendepolo/4839282057\n\nLicense:\nhttp://creativecommons.org/licenses/by/2.0/deed.en</string>
+
+    <string name="shrimp_name">Chinese Food Shrimp Broccoli</string>
+    <string name="shrimp_ingredients">Crevettes\nBroccoli\nHuile de tournesol\nPersil\nNuoc mam</string>
+    <string name="shrimp_credits">Photo: stevendepolo (unaltered)\nhttps://www.flickr.com/photos/stevendepolo/3090989795\n\nLicense:\nhttp://creativecommons.org/licenses/by/2.0/deed.en</string>
+
+    <string name="pie_name">Raspberry pie</string>
+    <string name="pie_ingredients">Fruits rouges\nFarine\nSucre\nOeufs\nVanille</string>
+    <string name="pie_credits">Photo: poolie (unaltered)\nhttps://www.flickr.com/photos/poolie/2368885028\n\nLicense:\nhttp://creativecommons.org/licenses/by/2.0/deed.en</string>
+</resources>

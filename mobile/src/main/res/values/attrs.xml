@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="fontPath" format="string"/>
+
+    <declare-styleable name="SemiBlurredImageTextView">
+        <attr name="imageBackground" format="reference"/>
+        <attr name="blurredText" format="string"/>
+        <attr name="blurredRadius" format="integer"/>
+    </declare-styleable>
+</resources>

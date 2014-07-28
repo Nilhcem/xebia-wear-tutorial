@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/blurred_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/food_potatoes"/>
+
+    <TextView
+        android:id="@+id/blurred_text"
+        fontPath="fonts/RobotoCondensed-Light.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center_horizontal"
+        android:padding="8dp"
+        android:textColor="@drawable/semi_blurred_text"
+        android:textSize="18sp"
+        tools:text="POTATOES"
+        tools:textColor="@android:color/white"/>
+</FrameLayout>
