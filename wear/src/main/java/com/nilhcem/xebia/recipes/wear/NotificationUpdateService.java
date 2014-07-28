@@ -1,5 +1,9 @@
 package com.nilhcem.xebia.recipes.wear;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -13,8 +17,12 @@ import com.google.android.gms.wearable.DataMap;
 import com.google.android.gms.wearable.DataMapItem;
 import com.google.android.gms.wearable.Wearable;
 import com.google.android.gms.wearable.WearableListenerService;
+import com.nilhcem.xebia.recipes.R;
+import com.nilhcem.xebia.recipes.common.BitmapUtils;
 import com.nilhcem.xebia.recipes.common.Constants;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -22,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 public class NotificationUpdateService extends WearableListenerService {
 
     private static final String TAG = NotificationUpdateService.class.getSimpleName();
+    private static final String RECEIVED_PHOTO_NAME = "background.png";
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -75,5 +84,44 @@ public class NotificationUpdateService extends WearableListenerService {
     }
 
     private void sendNotification(String title, String ingredients, ArrayList<String> steps, Bitmap photo) {
+        // this intent will open the activity when the user taps the "open" action on the notification
+        Intent viewIntent = new Intent(this, MainActivity.class);
+        viewIntent.putExtra(MainActivity.EXTRA_RECIPE_TITLE, title);
+        viewIntent.putExtra(MainActivity.EXTRA_RECIPE_INGREDIENTS, ingredients);
+        viewIntent.putExtra(MainActivity.EXTRA_RECIPE_STEPS, steps);
+        viewIntent.putExtra(MainActivity.EXTRA_RECIPE_PHOTO, saveDrawableTemporary(photo));
+        PendingIntent pendingViewIntent = PendingIntent.getActivity(this, 0, viewIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        saveDrawableTemporary(photo);
+
+        Notification notification = new Notification.Builder(this)
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setLargeIcon(photo)
+                .setContentText(title)
+                .addAction(new Notification.Action(R.drawable.ic_fork, getString(R.string.get_started), pendingViewIntent))
+                .build();
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(1, notification);
+    }
+
+    private String saveDrawableTemporary(Bitmap photo) {
+        String fileName = RECEIVED_PHOTO_NAME;
+        FileOutputStream stream = null;
+        try {
+            stream = openFileOutput(fileName, MODE_PRIVATE);
+            stream.write(BitmapUtils.toByteArray(photo));
+        } catch (IOException e) {
+            Log.e(TAG, "", e);
+        } finally {
+            if (stream != null) {
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                    Log.e(TAG, "", e);
+                }
+            }
+        }
+        return fileName;
     }
 }
