@@ -1,14 +1,7 @@
 package com.nilhcem.xebia.recipes;
 
 import android.app.Activity;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.app.TaskStackBuilder;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
@@ -47,33 +40,6 @@ public class RecipeActivity extends Activity {
         setContentView(R.layout.recipe);
         ButterKnife.inject(this);
         bindRecipeData();
-        createNotification();
-    }
-
-    private void createNotification() {
-        int notifId = 1;
-
-        Intent intent = new Intent(this, RecipeActivity.class);
-        intent.putExtra(EXTRA_RECIPE_NAME, mRecipe.name());
-
-        // Gets a PendingIntent containing the entire back stack
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addParentStack(RecipeActivity.class);
-        stackBuilder.addNextIntent(intent);
-        PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(this)
-                        .setContentIntent(pendingIntent)
-                        .setSmallIcon(R.drawable.ic_launcher)
-                        .setLargeIcon(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), mRecipe.drawableRes), 280, 280, false))
-                        .setContentTitle(getTitle())
-                        .setContentText(getString(mRecipe.nameRes));
-
-        // Affichage de la notification
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.cancelAll();
-        notificationManager.notify(notifId, builder.build());
     }
 
     /**
