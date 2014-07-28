@@ -4,7 +4,7 @@
 tmp/
 
 # Android files
-*.apk
+#*.apk
 *.ap_
 *.dex
 
