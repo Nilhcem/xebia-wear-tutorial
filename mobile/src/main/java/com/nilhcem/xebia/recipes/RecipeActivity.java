@@ -1,15 +1,7 @@
 package com.nilhcem.xebia.recipes;
 
 import android.app.Activity;
-import android.app.Notification;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.app.TaskStackBuilder;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
@@ -23,8 +15,6 @@ import android.widget.TextView;
 
 import com.nilhcem.xebia.recipes.core.Recipe;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import butterknife.ButterKnife;
@@ -50,56 +40,6 @@ public class RecipeActivity extends Activity {
         setContentView(R.layout.recipe);
         ButterKnife.inject(this);
         bindRecipeData();
-        createNotification();
-    }
-
-    private void createNotification() {
-        int notifId = 1;
-        NotificationManagerCompat notifManager = NotificationManagerCompat.from(this);
-
-        // Creates the "Open on phone" intent containing the entire back stack
-        Intent intent = new Intent(this, RecipeActivity.class);
-        intent.putExtra(EXTRA_RECIPE_NAME, mRecipe.name());
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addParentStack(RecipeActivity.class);
-        stackBuilder.addNextIntent(intent);
-        PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        // Creates multiple pages to this notification
-        List<Notification> notificationPages = new ArrayList<Notification>();
-        String[] steps = getResources().getStringArray(R.array.recipe_steps);
-        int nbSteps = steps.length + 1;
-        for (int i = 0; i < nbSteps; i++) {
-            String title, content;
-            if (i == 0) {
-                title = "Ingrédients";
-                content = getString(mRecipe.ingredientsRes);
-            } else {
-                title = String.format(Locale.FRANCE, "Étape %d", i);
-                content = steps[i - 1];
-            }
-
-            NotificationCompat.BigTextStyle style = new NotificationCompat.BigTextStyle();
-            style.setBigContentTitle(title);
-            style.bigText(content);
-
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-            builder.setStyle(style);
-            notificationPages.add(builder.build());
-        }
-
-        // Creates the notification. downscaling background bitmap
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                .setContentIntent(pendingIntent)
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setLargeIcon(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),
-                        mRecipe.drawableRes), 280, 280, false))
-                .setContentTitle(getTitle())
-                .setContentText(getString(mRecipe.nameRes));
-
-        Notification notification = builder.extend(new NotificationCompat.WearableExtender().addPages(notificationPages)).build();
-        notifManager.cancel(notifId);
-        notifManager.notify(notifId, notification);
     }
 
     /**
