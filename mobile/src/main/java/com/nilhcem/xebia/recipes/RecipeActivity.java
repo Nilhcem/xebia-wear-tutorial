@@ -20,6 +20,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.Asset;
 import com.google.android.gms.wearable.DataMap;
+import com.google.android.gms.wearable.MessageApi;
+import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.Wearable;
 import com.nilhcem.xebia.recipes.common.BitmapUtils;
@@ -33,7 +35,7 @@ import java.util.Locale;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class RecipeActivity extends Activity {
+public class RecipeActivity extends Activity implements MessageApi.MessageListener {
 
     public static final String EXTRA_RECIPE_NAME = "mRecipe";
 
@@ -107,12 +109,14 @@ public class RecipeActivity extends Activity {
                     @Override
                     public void onConnected(Bundle connectionHint) {
                         Log.d(TAG, "onConnected: " + connectionHint);
+                        Wearable.MessageApi.addListener(mGoogleApiClient, RecipeActivity.this);
                         sendNotificationToWearable();
                     }
 
                     @Override
                     public void onConnectionSuspended(int cause) {
                         Log.d(TAG, "onConnectionSuspended: " + cause);
+
                     }
                 })
                 .addOnConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
@@ -140,5 +144,22 @@ public class RecipeActivity extends Activity {
         Bitmap origBitmap = BitmapFactory.decodeResource(getResources(), drawableRes);
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(origBitmap, 280, 280, false);
         return Asset.createFromBytes(BitmapUtils.toByteArray(scaledBitmap));
+    }
+
+    @Override
+    public void onMessageReceived(MessageEvent messageEvent) {
+        if (messageEvent.getPath().equals(Constants.NOTIFICATION_STEP_PATH)) {
+            final Integer idx = Integer.parseInt(new String(messageEvent.getData()));
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    int y = 0;
+                    if (idx > 0) {
+                        y = mPicture.getBottom() + mIngredients.getBottom() + mSteps.getChildAt(idx - 1).getBottom();
+                    }
+                    mScrollView.smoothScrollTo(0, y);
+                }
+            });
+        }
     }
 }
