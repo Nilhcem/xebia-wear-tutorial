@@ -4,7 +4,7 @@ Exemple d'application utilisant le SDK Android Wear
 
 ### Lien vers l'article du blog de Xebia :
 
-[[[[[TODO]]]]]
+http://blog.xebia.fr/2014/08/01/enrichissez-vos-applications-existantes-avec-le-sdk-android-wear/
 
 ### Acknowledgments
 
